@@ -1,0 +1,16 @@
+[Default]
+title = "TestCluster"
+db-servers-hosts = "master:3306,slave:3306"
+db-servers-prefered-master = "master:3306"
+db-servers-credential = "root:pass"
+replication-credential = "replication:replicationpass"
+failover-mode = "manual"
+
+#replication-multi-master = true
+replication-source-name = "europe"
+
+log-level = 7
+
+http-bind-address = "0.0.0.0"
+
+switchover-at-equal-gtid = true

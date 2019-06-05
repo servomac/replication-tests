@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  master:
+    image: mariadb:10.1.25
+    env_file:
+      - ./.env.sample
+    volumes:
+      - ./configs/master.cfg:/etc/mysql/my.cnf
+
+  slave:
+    image: mariadb:10.3.15
+    env_file:
+      - ./.env.sample
+    volumes:
+      - ./configs/slave.cfg:/etc/mysql/my.cnf
+
+  manager:
+    image: signal18/replication-manager:2.1
+    volumes:
+      - ./config.toml:/etc/replication-manager/config.toml
+    ports:
+      - 127.0.0.1:10001:10001
+    depends_on:
+      - master
+      - slave
